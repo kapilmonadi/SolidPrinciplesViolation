@@ -5,7 +5,7 @@ import com.kta.dto.OrderDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UPIPaymentChannel implements PaymentChannel {
+public class CCPaymentChannel implements PaymentChannel {
     @Override
     public void processPayment(OrderDTO orderDTO) {
 
