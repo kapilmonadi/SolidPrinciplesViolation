@@ -1,7 +1,7 @@
 package com.kta.service;
 
-import org.springframework.stereotype.Service;
+import com.kta.dto.OrderDTO;
 
-@Service
-public class NotificationService {
+public interface NotificationService {
+    void sendNotification(OrderDTO orderDTO);
 }
