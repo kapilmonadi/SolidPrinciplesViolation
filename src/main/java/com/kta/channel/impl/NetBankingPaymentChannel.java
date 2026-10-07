@@ -4,12 +4,12 @@ import com.kta.channel.PaymentChannel;
 import com.kta.dto.OrderDTO;
 import org.springframework.stereotype.Component;
 
-@Component("UPI")
-public class UPIPaymentChannel implements PaymentChannel {
+@Component("NetBanking")
+public class NetBankingPaymentChannel implements PaymentChannel {
 
     @Override
     public void processPayment(OrderDTO orderDTO) {
-        System.out.println("Processing payment via UPI for order ID: " + orderDTO.getOrderId() +
+        System.out.println("Processing payment via NetBanking for order ID: " + orderDTO.getOrderId() +
                 ", Amount: " + orderDTO.getAmount());
     }
 }

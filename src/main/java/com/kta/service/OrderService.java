@@ -1,10 +1,12 @@
 package com.kta.service;
 
 import com.kta.dto.OrderDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
+
     public void placeOrder(OrderDTO orderDTO) {
         // validateOrder(orderDTO);
         makePayment(orderDTO);
@@ -26,14 +28,7 @@ public class OrderService {
     }
 
     private void calculateTax(OrderDTO orderDTO) {
-        double taxableAmount = Math.max(0, orderDTO.getAmount() - orderDTO.getDiscount());
-        double tax = taxableAmount * 0.18;
-        orderDTO.setTax(tax);
-        orderDTO.setTotalAmount(taxableAmount + tax);
-        System.out.println("Calculating tax for order ID: " + orderDTO.getOrderId() +
-                ", Discount: " + orderDTO.getDiscount() +
-                ", Tax: " + tax +
-                ", Total Amount: " + orderDTO.getTotalAmount());
+        TaxService.updateTaxableAmount(orderDTO);
     }
 
     private void generateInvoice(OrderDTO orderDTO) {
