@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component("COD")
 public class CashPaymentChannel implements PaymentChannel {
     @Override
-    public void processPayment(OrderDTO orderDTO) {
+    public void executePayment(OrderDTO orderDTO) {
         System.out.println("Processing order via Cash for order ID: " + orderDTO.getOrderId() +
                 ", Amount: " + orderDTO.getAmount());
         System.out.println("Collect the cash at the time of delivery");

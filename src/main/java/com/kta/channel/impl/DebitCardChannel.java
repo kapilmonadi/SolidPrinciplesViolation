@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component("DC")
 public class DebitCardChannel implements PaymentChannel {
     @Override
-    public void processPayment(OrderDTO orderDTO) {
+    public void executePayment(OrderDTO orderDTO) {
         System.out.println("Processing payment via Debit Card for order ID: " + orderDTO.getOrderId() +
                 ", Amount: " + orderDTO.getAmount());
     }

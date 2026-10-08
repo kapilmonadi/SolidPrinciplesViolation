@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class NetBankingPaymentChannel implements PaymentChannel {
 
     @Override
-    public void processPayment(OrderDTO orderDTO) {
+    public void executePayment(OrderDTO orderDTO) {
         System.out.println("Processing payment via NetBanking for order ID: " + orderDTO.getOrderId() +
                 ", Amount: " + orderDTO.getAmount());
     }

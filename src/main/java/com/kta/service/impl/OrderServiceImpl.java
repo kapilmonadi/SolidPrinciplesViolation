@@ -9,15 +9,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void placeOrder(OrderDTO orderDTO) {
-        // validateOrder(orderDTO);
-        makePayment(orderDTO);
+        processPayment(orderDTO);
         saveOrder(orderDTO);
         calculateTax(orderDTO);
         generateInvoice(orderDTO);
         sendNotification(orderDTO);
     }
 
-    private void makePayment(OrderDTO orderDTO) {
+    private void processPayment(OrderDTO orderDTO) {
         System.out.println("Processing makePayment for order ID: " + orderDTO.getOrderId() +
                 ", Amount: " + orderDTO.getAmount() +
                 ", Payment Method: " + orderDTO.getPaymentMethod());
