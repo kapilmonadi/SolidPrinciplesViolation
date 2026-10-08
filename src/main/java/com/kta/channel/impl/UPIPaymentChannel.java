@@ -5,12 +5,11 @@ import com.kta.channel.RefundChannel;
 import com.kta.dto.OrderDTO;
 import org.springframework.stereotype.Component;
 
-@Component("DC")
-public class DebitCardChannel implements PaymentChannel, RefundChannel {
+@Component("UPI")
+public class UPIPaymentChannel implements PaymentChannel, RefundChannel {
     @Override
     public void executePayment(OrderDTO orderDTO) {
-        System.out.println("Processing payment via Debit Card for order ID: " + orderDTO.getOrderId() +
-                ", Amount: " + orderDTO.getAmount());
+        System.out.println("This is UPI channel");
     }
 
     @Override

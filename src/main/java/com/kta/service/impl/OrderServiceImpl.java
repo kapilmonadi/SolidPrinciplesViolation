@@ -1,46 +1,34 @@
 package com.kta.service.impl;
 
 import com.kta.dto.OrderDTO;
-import com.kta.service.OrderService;
+import com.kta.service.*;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 public class OrderServiceImpl implements OrderService {
+
+    private final PaymentService paymentService;
+    private final OrderRepository orderRepository;
+    private final TaxService  taxService;
+    private final InvoiceService invoiceService;
+    private final NotificationService notificationService;
+
+    public OrderServiceImpl(PaymentService paymentService, OrderRepository orderRepository, TaxService taxService, InvoiceService invoiceService, NotificationService notificationService) {
+        this.paymentService = paymentService;
+        this.orderRepository = orderRepository;
+        this.taxService = taxService;
+        this.invoiceService = invoiceService;
+        this.notificationService = notificationService;
+    }
 
     @Override
     public void placeOrder(OrderDTO orderDTO) {
-        processPayment(orderDTO);
-        saveOrder(orderDTO);
-        calculateTax(orderDTO);
-        generateInvoice(orderDTO);
-        sendNotification(orderDTO);
-    }
-
-    private void processPayment(OrderDTO orderDTO) {
-        System.out.println("Processing makePayment for order ID: " + orderDTO.getOrderId() +
-                ", Amount: " + orderDTO.getAmount() +
-                ", Payment Method: " + orderDTO.getPaymentMethod());
-    }
-
-    private void saveOrder(OrderDTO orderDTO) {
-        System.out.println("Saving order to saveOrder: " + orderDTO.getOrderId() +
-                " for customer: " + orderDTO.getCustomerName());
-    }
-
-    private void calculateTax(OrderDTO orderDTO) {
-        System.out.println("Calculate tax");
-    }
-
-    private void generateInvoice(OrderDTO orderDTO) {
-        System.out.println("Generating generateInvoice for order ID: " + orderDTO.getOrderId() +
-                ", Billed to: " + orderDTO.getCustomerName() +
-                ", Discount: " + orderDTO.getDiscount() +
-                ", Total: " + orderDTO.getTotalAmount());
-    }
-
-    private void sendNotification(OrderDTO orderDTO) {
-        String phoneInfo = orderDTO.getPhoneNumber() != null ? ", Phone: " + orderDTO.getPhoneNumber() : "";
-        System.out.println("Sending sendNotification email to: " + orderDTO.getCustomerEmail() +
-                phoneInfo + " for order ID: " + orderDTO.getOrderId());
+        orderRepository.saveOrder(orderDTO);
+        taxService.calculateTax(orderDTO);
+        invoiceService.generateInvoice(orderDTO);
+        paymentService.processPayment(orderDTO);
+        notificationService.sendNotification(orderDTO);
     }
 }

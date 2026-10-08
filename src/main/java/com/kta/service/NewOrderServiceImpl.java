@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
-@Primary
 public class NewOrderServiceImpl implements OrderService {
     @Override
     public void placeOrder(OrderDTO orderDTO) {

@@ -13,7 +13,7 @@ public class TaxServiceImpl implements TaxService {
 
     static void updateTaxableAmount(OrderDTO orderDTO) {
         double taxableAmount = Math.max(0, orderDTO.getAmount() - orderDTO.getDiscount());
-        double tax = taxableAmount * 0.18;
+        double tax = taxableAmount * 0.28;
         orderDTO.setTax(tax);
         orderDTO.setTotalAmount(taxableAmount + tax);
         System.out.println("Calculating tax for order ID: " + orderDTO.getOrderId() +

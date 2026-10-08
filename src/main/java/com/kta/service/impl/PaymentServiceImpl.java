@@ -22,14 +22,6 @@ public class PaymentServiceImpl implements PaymentService {
     public void processPayment(OrderDTO orderDTO) {
         String paymentType = orderDTO.getPaymentMethod();
 
-       /* if(paymentType.equals("CC")){
-            // offer flat 5% discount
-        } else if (paymentType.equals("COD")) {
-            // charge .5% extra
-        } else {
-            // no discounts
-        }*/
-
         PaymentChannel paymentChannel = paymentChannelMap.get(paymentType);
         paymentChannel.executePayment(orderDTO);
     }
